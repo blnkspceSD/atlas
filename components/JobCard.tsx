@@ -39,7 +39,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
   };
 
   return (
-    <div className="bg-[#F7F7F7] rounded-[24px] border border-[#ECECEC] overflow-hidden hover:shadow-md transition-shadow pt-3 px-2 pb-2 flex flex-col h-full">
+    <div className="bg-[#F7F7F7] rounded-[24px] border border-[#ECECEC] overflow-hidden hover:shadow hover:bg-gray-100 transition-all pt-3 px-2 pb-2 flex flex-col h-full">
       {/* Header: Company Icon + Name + Featured Badge if applicable */}
       <div className="flex items-center mb-2 px-2">
         <div className="w-6 h-6 mr-2 relative overflow-hidden rounded-md">

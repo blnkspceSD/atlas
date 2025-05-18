@@ -97,31 +97,6 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse, currentPath }
             }}
           >
             <div className={`flex flex-col h-full ${isCollapsed ? 'items-center' : ''}`}>
-              {/* Sidebar Header (Logo and Collapse Toggle for desktop) */}
-              <div className={`flex items-center border-b border-gray-200 ${isCollapsed ? 'justify-center h-[57px]' : 'justify-between h-[57px] px-4'}`}>
-                {!isCollapsed && (
-                  <Link href="/" className="text-xl font-bold text-blue-600">
-                    Atlas
-                  </Link>
-                )}
-                <button
-                  onClick={onToggleCollapse}
-                  className={`p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full hidden md:block 
-                              ${isCollapsed ? 'transform rotate-180' : ''}`}
-                  aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                {/* Mobile close button */}
-                <button
-                  onClick={onClose}
-                  className="p-2 text-gray-600 hover:text-gray-900 md:hidden"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
               {/* Navigation Links */}
               <nav className="flex-grow p-4 space-y-6 overflow-y-auto">
                 {navItems.map((group) => (

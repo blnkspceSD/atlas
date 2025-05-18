@@ -7,18 +7,70 @@ import AppLayout from '@/components/AppLayout'
 import { JobData } from '@/types/job'
 import { JobFilterProvider, useJobFilters } from '@/contexts/JobFilterContext'
 
-// Removed sample data generators as we'll use real API data
+// New component to handle display of job list, loading, and error states
+interface JobListAreaProps {
+  isInitialLoading: boolean;
+  fetchError: string | null;
+}
+
+const JobListArea: React.FC<JobListAreaProps> = ({ isInitialLoading, fetchError }) => {
+  const { filteredJobs, isLoading: isFiltering } = useJobFilters(); // Renamed isLoading to isFiltering for clarity
+
+  if (isInitialLoading) {
+    return (
+      <div className="text-center py-12">
+        <div className="animate-pulse text-xl">Loading jobs...</div>
+      </div>
+    );
+  }
+
+  if (fetchError) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-red-500">{fetchError}</div>
+        <p className="mt-2">Please try refreshing the page or check back later.</p>
+      </div>
+    );
+  }
+
+  // If we are here, initial load is done and there was no fetch error.
+  // Now, check filtering state from JobFilterContext.
+  if (isFiltering) {
+    return (
+      <div className="text-center py-12">
+        <div className="animate-pulse text-xl">Filtering jobs...</div>
+      </div>
+    );
+  }
+
+  if (filteredJobs.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-xl">No jobs match your filter criteria.</div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className="my-4 text-sm text-gray-600">
+        Showing {filteredJobs.length} remote jobs
+      </div>
+      <JobList jobs={filteredJobs} />
+    </>
+  );
+};
 
 export default function Home() {
   const [allJobs, setAllJobs] = useState<JobData[]>([]);
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [fetchError, setFetchError] = useState<string | null>(null); // Renamed from error
 
   useEffect(() => {
-    // Fetch jobs from our API that connects to Remotive
     async function fetchJobs() {
       try {
         setIsInitialLoading(true);
+        setFetchError(null); // Clear previous errors
         const response = await fetch('/api/jobs');
         
         if (!response.ok) {
@@ -31,11 +83,15 @@ export default function Home() {
           setAllJobs(data.jobs);
         } else {
           console.error('Unexpected API response format:', data);
-          setError('Unexpected data format from API');
+          setFetchError('Unexpected data format from API. Please try again.');
         }
       } catch (err) {
         console.error('Error fetching jobs:', err);
-        setError('Failed to load jobs. Please try again later.');
+        let errorMessage = 'Failed to load jobs. Please try again later.';
+        if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        setFetchError(errorMessage);
       } finally {
         setIsInitialLoading(false);
       }
@@ -46,52 +102,13 @@ export default function Home() {
 
   return (
     <AppLayout>
-      {isInitialLoading ? (
-        <div className="text-center py-12">
-          <div className="animate-pulse text-xl">Loading jobs...</div>
-        </div>
-      ) : error ? (
-        <div className="text-center py-12">
-          <div className="text-red-500">{error}</div>
-          <p className="mt-2">Please try refreshing the page.</p>
-        </div>
-      ) : (
-        <JobFilterProvider initialJobs={allJobs}>
-          <HomeContent />
-        </JobFilterProvider>
-      )}
+      <JobFilterProvider initialJobs={allJobs}>
+        <SearchBar />
+        <JobListArea 
+          isInitialLoading={isInitialLoading} 
+          fetchError={fetchError} 
+        />
+      </JobFilterProvider>
     </AppLayout>
-  )
-}
-
-// This component uses the JobFilterContext
-function HomeContent() {
-  const { filteredJobs, isLoading } = useJobFilters();
-  
-  return (
-    <>
-      <SearchBar />
-      
-      {isLoading && (
-        <div className="text-center py-12">
-          <div className="animate-pulse text-xl">Filtering jobs...</div>
-        </div>
-      )}
-      
-      {!isLoading && filteredJobs.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-xl">No jobs match your filter criteria</div>
-        </div>
-      )}
-      
-      {!isLoading && filteredJobs.length > 0 && (
-        <>
-          <div className="my-4 text-sm text-gray-600">
-            Showing {filteredJobs.length} remote jobs
-          </div>
-          <JobList jobs={filteredJobs} />
-        </>
-      )}
-    </>
   );
 } 

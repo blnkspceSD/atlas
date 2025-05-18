@@ -64,9 +64,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         />
         
         <main 
-          className={`flex-1 overflow-y-auto bg-gray-50 p-6 ${
-            !isSidebarCollapsed && isSidebarOpen ? 'md:ml-64' : ''
-          }`}
+          className="flex-1 overflow-y-auto bg-gray-50 p-6"
         >
           <div className="min-h-full bg-gray-50">
             {children}

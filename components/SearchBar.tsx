@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { FilterChips, FilterChip } from '@/components/ui/filter-chips'
 import FeaturedFilterModal, { FeaturedFilterSettings } from '@/components/FeaturedFilterModal'
 import { useJobFilters } from '@/contexts/JobFilterContext'
+import { NaturalLanguageSearch } from './NaturalLanguageSearch'
 
 const SearchBar = () => {
   // State for filter modal
@@ -12,7 +13,7 @@ const SearchBar = () => {
   // Get filter settings and methods from context
   const { featuredFilterSettings, setFeaturedFilterSettings, applyFeaturedFilters } = useJobFilters();
   
-  const [regions, setRegions] = useState<FilterChip[]>([
+  const [regions, setRegions] = useState<FilterChip[]>(() => [
     { 
       id: '1', 
       text: 'Featured', 
@@ -29,66 +30,27 @@ const SearchBar = () => {
   ]);
 
   const handleRegionChange = (updatedChips: FilterChip[]) => {
-    // Update the local state with the new chip values
     setRegions(updatedChips);
-    // console.log('Region filters changed:', updatedChips);
   };
   
-  // Handle saving filter settings - now uses context
   const handleSaveFilterSettings = async (settings: FeaturedFilterSettings) => {
     setFeaturedFilterSettings(settings);
     setIsFilterModalOpen(false);
   };
 
-  // Handle search button click
-  const handleSearch = () => {
-    // Apply current filters when search button is clicked
+  const handleNaturalLanguageSearch = (query: string, withSearchActive: boolean) => {
+    console.log("Natural language query:", query);
+    console.log("Search (globe icon) active:", withSearchActive);
     applyFeaturedFilters();
-    // console.log('Search button clicked, applying filters');
   };
 
   return (
     <div className="mb-8">
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            placeholder="What's your job title?"
-            className="w-full p-4 pr-10 border border-gray-300 rounded-lg"
-          />
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-        </div>
-        
-        <div className="flex-1 relative">
-          <select className="w-full p-4 appearance-none border border-gray-300 rounded-lg">
-            <option value="">Location</option>
-            <option value="remote">Remote</option>
-            <option value="us">United States</option>
-            <option value="europe">Europe</option>
-            <option value="asia">Asia</option>
-          </select>
-          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-        </div>
-        
-        <div className="flex-1 relative">
-          <select className="w-full p-4 appearance-none border border-gray-300 rounded-lg">
-            <option value="">Salary range</option>
-            <option value="100k">$100,000+</option>
-            <option value="125k">$125,000+</option>
-            <option value="150k">$150,000+</option>
-            <option value="200k">$200,000+</option>
-          </select>
-          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-        </div>
-        
-        <Button size="lg" onClick={handleSearch}>
-          <Search className="h-5 w-5" />
-        </Button>
+      <div className="mb-6">
+        <NaturalLanguageSearch onSubmit={handleNaturalLanguageSearch} />
       </div>
       
-      {/* New container for filters and view options on one line */}
       <div className="flex items-center justify-between mb-6">
-        {/* Filter Chips - aligned to the left */}
         <div className="flex flex-wrap gap-2">
           <FilterChips
             initialChips={regions}
@@ -96,7 +58,6 @@ const SearchBar = () => {
           />
         </div>
         
-        {/* View Options - aligned to the right */}
         <div className="flex items-center">
           <span className="mr-2 text-sm text-gray-500">View</span>
           <Button variant="outline" size="icon" className="p-2">
@@ -108,7 +69,6 @@ const SearchBar = () => {
         </div>
       </div>
       
-      {/* Featured Filter Modal */}
       <FeaturedFilterModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}

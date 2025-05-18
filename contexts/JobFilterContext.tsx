@@ -48,6 +48,30 @@ export const JobFilterProvider: React.FC<{ children: React.ReactNode, initialJob
     return jobsList.filter(job => matchesFilterCriteria(job, settings));
   }, []);
   
+  // Apply the current filters to the jobs list
+  const applyFilters = useCallback((settings: FeaturedFilterSettings | null) => {
+    if (!settings) {
+      setManualFilteredJobs(jobs);
+      setFiltersApplied(false);
+      return;
+    }
+    
+    try {
+      const filtered = filterJobs(jobs, settings);
+      setManualFilteredJobs(filtered);
+      setFiltersApplied(true);
+      setError(null);
+      
+      if (filtered.length === 0 && jobs.length > 0) {
+        setError("No jobs match your current filters. Try adjusting your criteria.");
+      }
+    } catch (error) {
+      setError("Failed to apply filters. Showing all available jobs.");
+      setManualFilteredJobs(jobs);
+      setFiltersApplied(false);
+    }
+  }, [jobs, filterJobs]);
+  
   // Memoized filtered jobs - only recompute when dependencies change
   const computedFilteredJobs = useMemo(() => {
     // If we have manually set filtered jobs, use those
@@ -101,59 +125,6 @@ export const JobFilterProvider: React.FC<{ children: React.ReactNode, initialJob
     loadSettings();
   }, []);
   
-  // Save filter settings and apply them
-  const saveFeaturedSettings = useCallback(async (settings: FeaturedFilterSettings) => {
-    setIsLoading(true);
-    setError(null);
-    
-    try {
-      await saveFeaturedFilterSettings(settings, false);
-      setFeaturedFilterSettings(settings);
-      
-      const filtered = filterJobs(jobs, settings);
-      setManualFilteredJobs(filtered);
-      setFiltersApplied(true);
-      
-      if (filtered.length === 0 && jobs.length > 0) {
-        setError("No jobs match your current filters. Try adjusting your criteria.");
-      }
-    } catch (error) {
-      setError("Failed to save filter settings. Please try again.");
-      if (filtersApplied) {
-        applyFeaturedFilters();
-      } else {
-        setManualFilteredJobs(jobs);
-        setFiltersApplied(false);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [jobs, filterJobs, filtersApplied, applyFeaturedFilters]);
-  
-  // Apply the current filters to the jobs list
-  const applyFilters = useCallback((settings: FeaturedFilterSettings | null) => {
-    if (!settings) {
-      setManualFilteredJobs(jobs);
-      setFiltersApplied(false);
-      return;
-    }
-    
-    try {
-      const filtered = filterJobs(jobs, settings);
-      setManualFilteredJobs(filtered);
-      setFiltersApplied(true);
-      setError(null);
-      
-      if (filtered.length === 0 && jobs.length > 0) {
-        setError("No jobs match your current filters. Try adjusting your criteria.");
-      }
-    } catch (error) {
-      setError("Failed to apply filters. Showing all available jobs.");
-      setManualFilteredJobs(jobs);
-      setFiltersApplied(false);
-    }
-  }, [jobs, filterJobs]);
-  
   // Apply filters with current settings
   const applyFeaturedFilters = useCallback(() => {
     if (featuredFilterSettings) {
@@ -163,6 +134,28 @@ export const JobFilterProvider: React.FC<{ children: React.ReactNode, initialJob
       setFiltersApplied(false);
     }
   }, [jobs, featuredFilterSettings, applyFilters]);
+  
+  // Save filter settings and apply them
+  const saveFeaturedSettings = useCallback(async (settings: FeaturedFilterSettings) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      await saveFeaturedFilterSettings(settings, false);
+      setFeaturedFilterSettings(settings);
+      applyFilters(settings);
+    } catch (error) {
+      setError("Failed to save filter settings. Please try again.");
+      if (filtersApplied && featuredFilterSettings) { 
+        applyFilters(featuredFilterSettings); 
+      } else {
+        setManualFilteredJobs(jobs);
+        setFiltersApplied(false);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [jobs, filterJobs, filtersApplied, featuredFilterSettings, applyFilters]);
   
   // Reset filters to show all jobs
   const resetFilters = useCallback(() => {

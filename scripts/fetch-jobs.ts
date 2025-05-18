@@ -1,3 +1,5 @@
+import 'dotenv/config'; // Load .env file variables
+import { fileURLToPath } from 'url';
 import cron from 'node-cron';
 import { bulkStoreJobsFromApi, ensureJobIndexes } from '../lib/jobService';
 import { JobSource } from '@/types/jobStorage';
@@ -115,7 +117,8 @@ export async function fetchAllJobs() {
 }
 
 // If this script is run directly (not imported)
-if (require.main === module) {
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
   console.log('Starting job fetch script...');
   
   // Run immediately
