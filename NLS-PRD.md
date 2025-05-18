@@ -1,4 +1,93 @@
-*   Saving searches.
+## Product Requirements Document: Natural Language Job Search
+
+**1. Introduction**
+
+This document outlines the requirements for a new Natural Language Search feature within the existing job information platform. The goal is to enhance the user experience by allowing users to find relevant job postings using natural language queries or keywords, with results updating in real-time. This feature will search through all visible job information and the content of job descriptions.
+
+**2. Goals**
+
+*   Improve job discovery efficiency for users.
+*   Provide a more intuitive and user-friendly search experience compared to traditional keyword-only searches.
+*   Increase user engagement with the job listings.
+*   Deliver relevant search results quickly.
+
+**3. Target Users**
+
+*   Job seekers actively looking for employment opportunities.
+*   Passive candidates browsing for potential roles.
+*   Recruiters or internal employees looking for specific job postings.
+
+**4. User Stories**
+
+*   **As a job seeker, I want to type a question like "Show me remote software engineering jobs in New York that require Python" into the search bar so that I can quickly find relevant positions.**
+*   **As a user, I want to type keywords like "marketing manager London" and see a list of matching jobs.**
+*   **As a user, I want the search results to update automatically as I type my query, so I can refine my search on the fly.**
+*   **As a user, I want the search to consider information in the job title, location, company, tags, and the full job description to find the most relevant matches.**
+*   **As a user, I want the search to be forgiving of minor typos or variations in my phrasing.**
+*   **As a user, I expect the most relevant results to appear at the top of the list.**
+
+**5. Functional Requirements**
+
+*   **FR1: Natural Language Query Processing:**
+    *   The system must be able to parse and understand natural language queries related to job searches.
+    *   It should identify key entities like job titles, skills, locations, company names, experience levels, and employment types (e.g., "full-time," "remote," "contract").
+*   **FR2: Keyword Search Capability:**
+    *   The system must support traditional keyword-based searches.
+    *   Keywords can match any part of the job information, including title, description, company, location, etc.
+*   **FR3: Real-time Search Results:**
+    *   Search results must update in real-time or near real-time as the user types or modifies their query in the search bar.
+*   **FR4: Comprehensive Search Scope:**
+    *   The search must index and query all available job information fields presented to the user (e.g., job title, company, location, date posted, salary range if available, etc.).
+    *   The search must index and query the full text of job descriptions.
+*   **FR5: Relevance Ranking:**
+    *   Search results must be ranked by relevance to the user's query.
+    *   The ranking algorithm should prioritize jobs that are a strong match for the intent expressed in the natural language query or keywords.
+*   **FR6: Search Bar Interface:**
+    *   A prominent search bar will be the primary interface for this feature.
+*   **FR7: Handling of No Results:**
+    *   The system should provide a clear message if no results match the query.
+    *   It may offer suggestions for broadening the search or checking for typos.
+*   **FR8: Typo Tolerance/Fuzzy Matching (Optional but Recommended):**
+    *   The search should be able to handle minor misspellings or variations in user input and still return relevant results.
+
+**6. Non-Functional Requirements**
+
+*   **NFR1: Performance:**
+    *   Search results should ideally appear within 500ms of the user query, even with real-time updates.
+    *   The system must handle concurrent search requests efficiently.
+*   **NFR2: Scalability:**
+    *   The search infrastructure must be able to scale to accommodate a growing number of job listings and users.
+*   **NFR3: Accuracy:**
+    *   The natural language processing should accurately interpret user intent for common job search queries.
+    *   Search results should be highly relevant to the query.
+*   **NFR4: Usability:**
+    *   The search interface should be intuitive and easy to use.
+*   **NFR5: Reliability:**
+    *   The search feature should be highly available and reliable.
+
+**7. Design Considerations (UI/UX)**
+
+*   **Search Bar:** Clean, prominent, and easily accessible.
+*   **Real-time Feedback:** Visual indication that the search is processing as the user types (e.g., a subtle loader).
+*   **Result Display:** Clear and concise presentation of job results, highlighting matched terms if feasible.
+*   **Suggestions (Optional):** Autocomplete suggestions for queries or filters as the user types.
+*   **Filter Integration:** Consider how natural language search interacts with existing or future filter options (e.g., a natural language query could pre-populate filters).
+
+**8. Success Metrics**
+
+*   **SM1: Search Conversion Rate:** Percentage of searches that lead to a user clicking on a job listing.
+*   **SM2: Time to Find Job:** Reduction in the average time it takes for a user to find and click on a relevant job.
+*   **SM3: Zero-Result Searches:** Reduction in the percentage of searches that return no results.
+*   **SM4: User Satisfaction:** Measured through surveys or feedback mechanisms regarding the search experience.
+*   **SM5: Feature Adoption Rate:** Percentage of users who utilize the natural language search feature.
+
+**9. Future Considerations / Out of Scope (for this version)**
+
+*   **Out of Scope:**
+    *   Voice-based search.
+    *   Personalized search results based on user history (beyond the current session).
+    *   Advanced query syntax (e.g., boolean operators explicitly entered by users, unless naturally inferred).
+    *   Saving searches.
 *   **Future Considerations:**
     *   Integration with a recommendation engine.
     *   Semantic understanding of skills (e.g., knowing "Java" and "J2EE" are related).
