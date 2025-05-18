@@ -13,9 +13,7 @@ const dotenv = require('dotenv');
 // Load environment variables
 dotenv.config();
 
-// MongoDB connection details
-const uri = process.env.MONGODB_URI || 'mongodb+srv://whteblnkspce:nPx7A9iIf7EHttzn@cluster0.bccrxaj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-const dbName = process.env.MONGODB_DB || 'atlas-jobs';
+// MongoDB connection details ARE NOW MOVED INTO updateSalaryData()
 const JOBS_COLLECTION = 'jobs';
 
 // Import the actual parser is not possible with require in Node.js script
@@ -104,6 +102,14 @@ function parseSalary(raw) {
 }
 
 async function updateSalaryData() {
+  const uri = process.env.MONGODB_URI;
+  const dbName = process.env.MONGODB_DB || 'atlas-jobs';
+
+  if (!uri) {
+    console.error('Error: MONGODB_URI environment variable is not set. Please set it and try again.');
+    process.exit(1); 
+  }
+
   console.log('Starting salary data update...');
   
   let client;

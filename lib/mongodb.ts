@@ -1,7 +1,11 @@
 import { MongoClient } from 'mongodb';
 
-// Use hardcoded connection string for now since we can't modify .env
-const uri = process.env.MONGODB_URI || 'mongodb+srv://whteblnkspce:nPx7A9iIf7EHttzn@cluster0.bccrxaj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error('FATAL ERROR: MONGODB_URI environment variable is not set.');
+}
+
 const options = {};
 
 let client: MongoClient;
