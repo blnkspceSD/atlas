@@ -11,7 +11,13 @@ const SearchBar = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   
   // Get filter settings and methods from context
-  const { featuredFilterSettings, setFeaturedFilterSettings, applyFeaturedFilters } = useJobFilters();
+  const { 
+    searchQuery,
+    setSearchQuery,
+    featuredFilterSettings, 
+    setFeaturedFilterSettings, 
+    applyFeaturedFilters 
+  } = useJobFilters();
   
   const [regions, setRegions] = useState<FilterChip[]>(() => [
     { 
@@ -31,26 +37,35 @@ const SearchBar = () => {
 
   const handleRegionChange = (updatedChips: FilterChip[]) => {
     setRegions(updatedChips);
+    // TODO: Update jobFilters context based on selected regions
   };
   
   const handleSaveFilterSettings = async (settings: FeaturedFilterSettings) => {
     setFeaturedFilterSettings(settings);
     setIsFilterModalOpen(false);
+    applyFeaturedFilters();
   };
 
-  const handleNaturalLanguageSearch = (query: string, withSearchActive: boolean) => {
-    console.log("Natural language query:", query);
-    console.log("Search (globe icon) active:", withSearchActive);
+  // This function is called by NaturalLanguageSearch when a search is submitted
+  const handleNaturalLanguageSearch = (query: string) => { 
+    console.log("Natural language query submitted:", query);
+    setSearchQuery(query);
     applyFeaturedFilters();
   };
 
   return (
-    <div className="mb-8">
-      <div className="mb-6">
-        <NaturalLanguageSearch onSubmit={handleNaturalLanguageSearch} />
+    <div className="pb-4 sticky top-0 z-10 border-b mb-6">
+      {/* Container for the search bar itself */}
+      <div className="container mx-auto max-w-[1440px] mb-4">
+        <NaturalLanguageSearch 
+          initialQuery={searchQuery}
+          onSearch={handleNaturalLanguageSearch} 
+          className="w-full"
+        />
       </div>
       
-      <div className="flex items-center justify-between mb-6">
+      {/* Container for filter chips and view options */}
+      <div className="container mx-auto max-w-[1440px] flex items-center justify-between">
         <div className="flex flex-wrap gap-2">
           <FilterChips
             initialChips={regions}
@@ -59,12 +74,12 @@ const SearchBar = () => {
         </div>
         
         <div className="flex items-center">
-          <span className="mr-2 text-sm text-gray-500">View</span>
+          <span className="mr-2 text-sm text-gray-500 dark:text-gray-400">View</span>
           <Button variant="outline" size="icon" className="p-2">
-            <List className="h-4 w-4 text-gray-600" />
+            <List className="h-4 w-4 text-gray-600 dark:text-gray-300" />
           </Button>
           <Button variant="outline" size="icon" className="ml-2 p-2">
-            <LayoutGrid className="h-4 w-4 text-gray-600" />
+            <LayoutGrid className="h-4 w-4 text-gray-600 dark:text-gray-300" />
           </Button>
         </div>
       </div>
@@ -73,10 +88,10 @@ const SearchBar = () => {
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
         onSave={handleSaveFilterSettings}
-        initialSettings={featuredFilterSettings || undefined}
+        initialSettings={featuredFilterSettings || undefined} // Pass undefined if null
       />
     </div>
-  )
+  );
 }
 
 export default SearchBar 

@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { JobData, SalaryRange } from '@/types/job';
 import { JobRecord, JobSource, JobTransformer, createJobSignature } from '@/types/jobStorage';
-import { formatDate, formatSalary } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import { parseSalary, isValidSalaryFormat } from '@/lib/salaryParser';
 import { transformTheirStackJob } from './transformers/theirStackTransformer';
 
@@ -66,7 +66,6 @@ export const remotiveTransformer: JobTransformer = {
   },
   
   fromDatabaseToFrontend: (job: JobRecord): JobData => {
-    const formattedSalary = formatSalary(job.salary);
     const hasSalary = isValidSalaryFormat(job.salary);
     
     return {
@@ -74,9 +73,9 @@ export const remotiveTransformer: JobTransformer = {
       company: job.company,
       logo: job.logo,
       title: job.title,
-      salary: formattedSalary,
+      salary: job.salary || '',
       salaryRange: job.salaryRange,
-      hasSalary: hasSalary, // Add a flag to indicate if the job has a real salary
+      hasSalary: hasSalary,
       benefits: job.benefits || [],
       remote: job.remote,
       usOnly: job.location?.includes('USA') || job.location?.includes('US only') || false,
@@ -179,7 +178,6 @@ export const jobicyTransformer: JobTransformer = {
   },
   
   fromDatabaseToFrontend: (job: JobRecord): JobData => {
-    const formattedSalary = formatSalary(job.salary);
     const hasSalary = isValidSalaryFormat(job.salary);
     
     return {
@@ -187,9 +185,9 @@ export const jobicyTransformer: JobTransformer = {
       company: job.company,
       logo: job.logo,
       title: job.title,
-      salary: formattedSalary,
+      salary: job.salary || '',
       salaryRange: job.salaryRange,
-      hasSalary: hasSalary, // Add a flag to indicate if the job has a real salary
+      hasSalary: hasSalary,
       benefits: job.benefits || [],
       remote: job.remote,
       usOnly: job.location?.includes('USA') || job.location?.includes('US only') || false,

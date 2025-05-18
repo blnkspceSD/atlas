@@ -2,16 +2,16 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, Send } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 interface NaturalLanguageSearchProps {
   id?: string;
-  placeholder?: string;
   minHeight?: number;
   maxHeight?: number;
-  onSubmit?: (value: string, withSearch: boolean) => void;
+  onSearch: (query: string) => void;
+  initialQuery?: string;
   className?: string;
 }
 
@@ -64,25 +64,21 @@ function useAutoResizeTextarea({
 
 export function NaturalLanguageSearch({
   id = "natural-language-search",
-  placeholder = "Search for jobs by title, skill, company, or location...",
   minHeight = 48,
   maxHeight = 164,
-  onSubmit,
-  className
+  onSearch,
+  initialQuery = '',
+  className,
 }: NaturalLanguageSearchProps) {
-  const [value, setValue] = useState("");
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
     minHeight,
     maxHeight,
   });
-  const [showSearch, setShowSearch] = useState(true);
   
   const placeholders = [
-    "Search for jobs like marketing manager in New York...",
-    "Remote software engineer jobs paying over $150k",
-    "Entry-level design roles in San Francisco",
-    "Part-time customer support jobs, worldwide",
-    "Senior product manager, fintech, London"
+    "Search jobs by title, skill, company...",
+    "e.g., remote software engineer, $150k+",
+    "marketing manager in New York City",
   ];
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -113,134 +109,77 @@ export function NaturalLanguageSearch({
     };
   }, [startAnimation, handleVisibilityChange]);
 
+  const [value, setValue] = useState(initialQuery);
+
   const handleSubmit = () => {
     if (value.trim()) {
-      onSubmit?.(value, showSearch);
-      setValue("");
-      adjustHeight(true);
+      onSearch(value.trim());
     }
   };
 
-  return (
-    <div className={cn("w-full", className)}>
-      <div className="relative max-w-xl w-full mx-auto">
-        <div className="relative flex flex-col">
-          <div
-            className="overflow-y-auto"
-            style={{ maxHeight: `${maxHeight}px` }}
-          >
-            <Textarea
-              id={id}
-              value={value}
-              className="w-full rounded-xl rounded-b-none px-4 py-3 bg-black/5 dark:bg-white/5 border-gray-300 dark:border-gray-700 border dark:text-white resize-none focus-visible:ring-0 focus-visible:ring-offset-0 leading-[1.2]"
-              ref={textareaRef}
-              onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSubmit();
-                }
-              }}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                setValue(e.target.value);
-                adjustHeight();
-              }}
-            />
-            {!value && (
-              <div className="absolute inset-0 pointer-events-none px-4 py-3">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    initial={{ y: 5, opacity: 0 }}
-                    key={`current-placeholder-${currentPlaceholder}`}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -15, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "linear" }}
-                    className="dark:text-zinc-500 text-sm sm:text-base font-normal text-neutral-500 text-left w-[calc(100%-2rem)] truncate leading-[1.2]"
-                  >
-                    {placeholders[currentPlaceholder]}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-            )}
-          </div>
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
 
-          <div className="h-12 bg-black/5 dark:bg-white/5 rounded-b-xl border-gray-300 dark:border-gray-700 border border-t-0 flex items-center justify-between px-3">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setShowSearch(!showSearch)}
-                className={cn(
-                  "rounded-full transition-all flex items-center gap-2 px-1.5 py-1 border h-8",
-                  showSearch
-                    ? "bg-sky-500/15 border-sky-400 text-sky-500"
-                    : "bg-black/5 dark:bg-white/5 border-transparent text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white"
-                )}
-              >
-                <div className="w-4 h-4 flex items-center justify-center flex-shrink-0">
-                  <motion.div
-                    animate={{
-                      rotate: showSearch ? 180 : 0,
-                      scale: showSearch ? 1.1 : 1,
-                    }}
-                    whileHover={{
-                      rotate: showSearch ? 180 : 15,
-                      scale: 1.1,
-                      transition: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 10,
-                      },
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 25,
-                    }}
-                  >
-                    <Globe
-                      className={cn(
-                        "w-4 h-4",
-                        showSearch
-                          ? "text-sky-500"
-                          : "text-inherit"
-                      )}
-                    />
-                  </motion.div>
-                </div>
-                <AnimatePresence>
-                  {showSearch && (
-                    <motion.span
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{
-                        width: "auto",
-                        opacity: 1,
-                      }}
-                      exit={{ width: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-sm overflow-hidden whitespace-nowrap text-sky-500 flex-shrink-0"
-                    >
-                      Search
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className={cn(
-                  "rounded-lg p-2 transition-colors h-8 w-8 flex items-center justify-center",
-                  value
-                    ? "bg-sky-500/15 text-sky-500"
-                    : "bg-black/5 dark:bg-white/5 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white"
-                )}
-              >
-                <Send className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+  const buttonWidthAndSpacing = "w-8";
+  const buttonRightOffset = "right-3";
+  const textAreaRightPadding = "pr-12";
+
+  return (
+    <div className={cn("w-full relative", className)}>
+      <Textarea
+        id={id}
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          setValue(e.target.value);
+        }}
+        onKeyDown={handleKeyDown}
+        className={cn(
+          "w-full rounded-xl bg-black/5 dark:bg-white/5 dark:text-white",
+          "resize-none focus-visible:ring-0 focus-visible:ring-offset-0 leading-[1.2] text-sm",
+          "p-3",
+          textAreaRightPadding
+        )}
+        style={{ minHeight: `${minHeight}px` }}
+        ref={textareaRef}
+      />
+      {!value && (
+        <div className={cn(
+          "absolute inset-0 flex items-center pointer-events-none",
+          "p-3",
+          textAreaRightPadding
+        )}>
+          <AnimatePresence mode="wait">
+            <motion.p
+              initial={{ y: 5, opacity: 0 }}
+              key={`current-placeholder-${currentPlaceholder}`}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -15, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "linear" }}
+              className="text-neutral-500 dark:text-zinc-500 text-sm font-normal text-left truncate leading-[1.2] w-full"
+            >
+              {placeholders[currentPlaceholder]}
+            </motion.p>
+          </AnimatePresence>
         </div>
-      </div>
+      )}
+      <button
+        type="button"
+        onClick={handleSubmit}
+        className={cn(
+          "absolute top-1/2 -translate-y-1/2",
+          buttonRightOffset,
+          "h-8 w-8 p-0 flex items-center justify-center rounded-md",
+          "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600",
+          "disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        )}
+        aria-label="Search"
+      >
+        <SendHorizonal size={20} className="text-gray-600 dark:text-gray-300" />
+      </button>
     </div>
   );
 } 
