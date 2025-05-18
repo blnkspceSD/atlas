@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Jobs</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .job-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #fff; }
+        .job-card h2 { margin-top: 0; color: #007bff; }
+        .job-card p { margin: 5px 0; }
+        .job-card .company { font-weight: bold; }
+        .job-card .date { font-size: 0.9em; color: #666; }
+        .job-card .source-link { display: block; margin-top: 10px; font-size: 0.9em; }
+        .error-message { color: red; text-align: center; padding: 20px; background-color: #ffecec; border: 1px solid red; border-radius: 5px; }
+        .empty-message { text-align: center; padding: 20px; background-color: #e9ecef; border: 1px solid #ced4da; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Listings</h1>
+        {% if file_error %}
+            <p class="error-message">{{ file_error }}</p>
+        {% elif jobs %}
+            {% for job in jobs %}
+                <div class="job-card">
+                    <h2>{{ job.title }}</h2>
+                    <p><span class="company">{{ job.company_name }}</span> - <span>{{ job.category }}</span></p>
+                    <p class="date">Published: {{ job.publication_date.strftime('%Y-%m-%d') }}</p>
+                    {% if job.candidate_required_location %}
+                        <p>Location: {{ job.candidate_required_location }}</p>
+                    {% endif %}
+                    {% if job.salary %}
+                        <p>Salary: {{ job.salary | format_salary }}</p>
+                    {% endif %}
+                    <!-- <p>Description: {{ job.description_html | safe | truncate(200) }}</p> -->
+                    <a href="{{ job.remotive_url }}" target="_blank" class="source-link">View on Remotive (Source)</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-message">No jobs found. Try running the update script or check the source file.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

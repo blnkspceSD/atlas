@@ -1,0 +1,59 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#F7FAFC"/>
+  
+  <!-- Background elements -->
+  <rect x="50" y="50" width="500" height="300" rx="8" fill="#EDF2F7"/>
+  <circle cx="150" cy="100" r="30" fill="#E2E8F0"/>
+  <circle cx="450" cy="300" r="40" fill="#E2E8F0"/>
+  
+  <!-- Desk -->
+  <rect x="100" y="250" width="400" height="20" rx="2" fill="#718096"/>
+  <rect x="120" y="270" width="30" height="80" fill="#718096"/>
+  <rect x="450" y="270" width="30" height="80" fill="#718096"/>
+  
+  <!-- Laptop -->
+  <g>
+    <!-- Laptop base -->
+    <rect x="220" y="220" width="160" height="10" rx="2" fill="#4A5568"/>
+    <rect x="225" y="218" width="150" height="5" rx="1" fill="#2D3748"/>
+    
+    <!-- Laptop screen -->
+    <rect x="230" y="140" width="140" height="80" rx="2" fill="#2D3748"/>
+    <rect x="235" y="145" width="130" height="70" rx="1" fill="#63B3ED"/>
+    
+    <!-- Code on screen -->
+    <rect x="245" y="155" width="50" height="3" fill="#FFFFFF" fillOpacity="0.7"/>
+    <rect x="245" y="165" width="80" height="3" fill="#FFFFFF" fillOpacity="0.7"/>
+    <rect x="245" y="175" width="60" height="3" fill="#FFFFFF" fillOpacity="0.7"/>
+    <rect x="245" y="185" width="70" height="3" fill="#FFFFFF" fillOpacity="0.7"/>
+    <rect x="245" y="195" width="40" height="3" fill="#FFFFFF" fillOpacity="0.7"/>
+  </g>
+  
+  <!-- Coffee cup -->
+  <g>
+    <rect x="380" y="200" width="30" height="40" rx="4" fill="#F56565"/>
+    <rect x="385" y="200" width="20" height="5" rx="2" fill="#C53030"/>
+    <path d="M410 210 C420 215, 420 225, 410 230" stroke="#C53030" strokeWidth="2" fill="none"/>
+  </g>
+  
+  <!-- Plant -->
+  <g>
+    <rect x="150" y="180" width="30" height="40" rx="2" fill="#4A5568"/>
+    <path d="M165 180 C165 170, 155 160, 165 150" stroke="#48BB78" strokeWidth="2" fill="none"/>
+    <path d="M165 180 C165 170, 175 160, 165 150" stroke="#48BB78" strokeWidth="2" fill="none"/>
+    <path d="M165 160 C165 150, 155 140, 165 130" stroke="#48BB78" strokeWidth="2" fill="none"/>
+    <path d="M165 160 C165 150, 175 140, 165 130" stroke="#48BB78" strokeWidth="2" fill="none"/>
+    <circle cx="165" cy="130" r="5" fill="#68D391"/>
+    <circle cx="155" cy="145" r="5" fill="#68D391"/>
+    <circle cx="175" cy="145" r="5" fill="#68D391"/>
+  </g>
+  
+  <!-- Window -->
+  <g>
+    <rect x="430" y="100" width="100" height="80" rx="2" fill="#63B3ED"/>
+    <rect x="435" y="105" width="90" height="70" rx="1" fill="#90CDF4"/>
+    <path d="M435 140 L525 140" stroke="#63B3ED" strokeWidth="2"/>
+    <path d="M480 105 L480 175" stroke="#63B3ED" strokeWidth="2"/>
+    <circle cx="480" cy="120" r="10" fill="#F6E05E"/>
+  </g>
+</svg> 
