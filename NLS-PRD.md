@@ -102,7 +102,7 @@ To validate the core functionality and technical feasibility efficiently, the PO
     *   **Steps:**
         1.  **Prepare Sample Dataset:** Collect a representative sample of job data (approx. 200-1000 listings) including fields like `title`, `description`, `location`, `company`, and `skills_tags` (if available). Export as JSON.
         2.  **Set Up Lean Search Engine:**
-            *   **Recommendation:** Utilize the free tier of a Search-as-a-Service platform (e.g., Typesense Cloud, Algolia) or a lightweight self-hosted option (e.g., Meilisearch).
+            *   **Recommendation:** Utilize the free tier of a Search-as-a-Service platform (e.g., Algolia, Typesense Cloud) or a lightweight self-hosted option (e.g., Meilisearch).
             *   **Action:** Index the sample job data into the chosen search engine.
         3.  **Build Minimal Search UI:** Develop a simple web page with a search input. Use the search engine's client library to send queries directly to the engine as the user types, displaying results in real-time.
     *   **Outcome:** A working interface where users can type keywords and see relevant job listings update instantly.

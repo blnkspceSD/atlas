@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "title": "Remote Software Engineer (Python, Django)",
+    "description": "Seeking a talented Remote Software Engineer proficient in Python and Django to build and maintain scalable web applications. Experience with REST APIs and cloud platforms like AWS is a plus. Join our dynamic team and work on exciting projects from anywhere!",
+    "location": "Remote",
+    "city": "Remote", 
+    "country": "Any", 
+    "company": "Innovatech Solutions",
+    "skills_tags": ["python", "django", "api", "remote", "aws", "software engineer"],
+    "employment_type": "full-time", 
+    "experience_level": "mid-senior", 
+    "date_posted": "2024-07-28"
+  },
+  {
+    "id": "2",
+    "title": "Marketing Manager - SaaS Products",
+    "description": "We are looking for an experienced Marketing Manager to lead our SaaS product marketing strategy. Responsibilities include campaign management, content creation, and market analysis. Must have experience in B2B marketing. Based in New York.",
+    "location": "New York, NY",
+    "city": "New York",
+    "country": "USA",
+    "company": "Connectly Inc.",
+    "skills_tags": ["marketing", "saas", "b2b", "campaign management", "content creation", "new york"],
+    "employment_type": "full-time",
+    "experience_level": "senior",
+    "date_posted": "2024-07-25"
+  },
+  {
+    "id": "3",
+    "title": "Junior UI/UX Designer (Remote Option)",
+    "description": "Exciting opportunity for a Junior UI/UX Designer to join our creative team. You will be involved in designing user interfaces for web and mobile applications. Portfolio required. Remote option available for strong candidates within the USA.",
+    "location": "Remote (USA)",
+    "city": "Remote",
+    "country": "USA",
+    "company": "PixelPerfect Studios",
+    "skills_tags": ["ui", "ux", "design", "figma", "adobe xd", "web design", "mobile design", "remote"],
+    "employment_type": "full-time",
+    "experience_level": "junior",
+    "date_posted": "2024-07-29"
+  },
+  {
+    "id": "4",
+    "title": "Data Scientist - Machine Learning",
+    "description": "Join our data science team to develop machine learning models for predictive analytics. Strong background in Python, R, and SQL required. Experience with TensorFlow or PyTorch is highly desirable. Role based in London.",
+    "location": "London, UK",
+    "city": "London",
+    "country": "UK",
+    "company": "Alpha Data Corp",
+    "skills_tags": ["data science", "machine learning", "python", "r", "sql", "tensorflow", "pytorch", "london"],
+    "employment_type": "full-time",
+    "experience_level": "mid-senior",
+    "date_posted": "2024-07-22"
+  },
+  {
+    "id": "5",
+    "title": "Part-Time Content Writer - Tech",
+    "description": "We need a skilled Content Writer to produce engaging articles and blog posts on technology topics. Flexible hours, fully remote. Must have a portfolio of published work. Understanding of SEO principles is a plus.",
+    "location": "Remote",
+    "city": "Remote",
+    "country": "Any",
+    "company": "TechScribe Agency",
+    "skills_tags": ["content writing", "blogging", "seo", "technology", "remote", "editing"],
+    "employment_type": "part-time",
+    "experience_level": "mid",
+    "date_posted": "2024-07-30"
+  }
+] 
