@@ -57,80 +57,80 @@ Job seekers face several challenges when searching for remote positions:
 
 ## Feature Roadmap
 
-### Phase 1: Platform Enhancements (Near-term)
+### 1.0 Platform Enhancements (Near-term)
 
-1. **User Accounts**
-   - Implement Supabase authentication for user accounts
-   - User profile creation and management
-   - Saved job functionality
-   - Job application tracking
+#### 1.1 User Accounts
+   - 1.1.1 Implement Supabase authentication for user accounts
+   - 1.1.2 User profile creation and management
+   - 1.1.3 Saved job functionality
+   - 1.1.4 Job application tracking
 
-2. **Enhanced Filtering**
-   - Advanced search with keyword highlighting
-   - Technology/skill-based filtering
-   - Experience level filtering (junior, mid, senior)
-   - Industry/domain filtering
+#### 1.2 Enhanced Filtering
+   - 1.2.1 Advanced search with keyword highlighting
+   - 1.2.2 Technology/skill-based filtering
+   - 1.2.3 Experience level filtering (junior, mid, senior)
+   - 1.2.4 Industry/domain filtering
 
-3. **Job Alerts**
-   - Email notifications for new jobs matching criteria
-   - Custom alert frequency settings
-   - Personalized job recommendations
+#### 1.3 Job Alerts
+   - 1.3.1 Email notifications for new jobs matching criteria
+   - 1.3.2 Custom alert frequency settings
+   - 1.3.3 Personalized job recommendations
 
-4. **Mobile Optimization**
-   - Responsive design improvements for smaller screens
-   - Mobile-specific UI enhancements
-   - Touch-friendly interactions
+#### 1.4 Mobile Optimization
+   - 1.4.1 Responsive design improvements for smaller screens
+   - 1.4.2 Mobile-specific UI enhancements
+   - 1.4.3 Touch-friendly interactions
 
-### Phase 2: Advanced Features (Mid-term)
+### 2.0 Advanced Features (Mid-term)
 
-5. **Salary Insights**
-   - Salary benchmarking by role and location
-   - Compensation analysis tools
-   - Total compensation calculator (salary + benefits)
-   - Cost of living adjustments for different locations
+#### 2.1 Salary Insights
+   - 2.1.1 Salary benchmarking by role and location
+   - 2.1.2 Compensation analysis tools
+   - 2.1.3 Total compensation calculator (salary + benefits)
+   - 2.1.4 Cost of living adjustments for different locations
 
-6. **Social Features**
-   - Job sharing functionality
-   - Referral system
-   - Community upvoting of quality positions
-   - Comments and reviews on companies
+#### 2.2 Social Features
+   - 2.2.1 Job sharing functionality
+   - 2.2.2 Referral system
+   - 2.2.3 Community upvoting of quality positions
+   - 2.2.4 Comments and reviews on companies
 
-7. **Application Enhancement**
-   - One-click application through integrated ATS
-   - Resume/CV builder and storage
-   - Application status tracking
-   - Interview scheduling integration
+#### 2.3 Application Enhancement
+   - 2.3.1 One-click application through integrated ATS
+   - 2.3.2 Resume/CV builder and storage
+   - 2.3.3 Application status tracking
+   - 2.3.4 Interview scheduling integration
 
-8. **Additional Job Sources**
-   - Integration with more job boards and APIs
-   - Direct employer postings
-   - Recruiter portal for job submissions
+#### 2.4 Additional Job Sources
+   - 2.4.1 Integration with more job boards and APIs
+   - 2.4.2 Direct employer postings
+   - 2.4.3 Recruiter portal for job submissions
 
-### Phase 3: Platform Expansion (Long-term)
+### 3.0 Platform Expansion (Long-term)
 
-9. **Employer Features**
-   - Employer profiles and branding
-   - Direct job posting functionality
-   - Candidate discovery tools
-   - Analytics for employers
+#### 3.1 Employer Features
+   - 3.1.1 Employer profiles and branding
+   - 3.1.2 Direct job posting functionality
+   - 3.1.3 Candidate discovery tools
+   - 3.1.4 Analytics for employers
 
-10. **Personalization**
-    - AI-powered job recommendations
-    - Skills assessment integration
-    - Career path visualization
-    - Learning resources for skill development
+#### 3.2 Personalization
+   - 3.2.1 AI-powered job recommendations
+   - 3.2.2 Skills assessment integration
+   - 3.2.3 Career path visualization
+   - 3.2.4 Learning resources for skill development
 
-11. **Internationalization**
-    - Multi-language support
-    - Region-specific job collections
-    - International salary comparison tools
-    - Country-specific remote work resources
+#### 3.3 Internationalization
+   - 3.3.1 Multi-language support
+   - 3.3.2 Region-specific job collections
+   - 3.3.3 International salary comparison tools
+   - 3.3.4 Country-specific remote work resources
 
-12. **Premium Features**
-    - Premium subscription with advanced features
-    - Early access to new job listings
-    - Premium filtering capabilities
-    - Career coaching integration
+#### 3.4 Premium Features
+   - 3.4.1 Premium subscription with advanced features
+   - 3.4.2 Early access to new job listings
+   - 3.4.3 Premium filtering capabilities
+   - 3.4.4 Career coaching integration
 
 ## Technical Requirements
 
