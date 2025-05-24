@@ -54,33 +54,39 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="pb-4 sticky top-0 z-10 border-b mb-6">
-      {/* Container for the search bar itself */}
-      <div className="container mx-auto max-w-[1440px] mb-4">
-        <NaturalLanguageSearch 
-          initialQuery={searchQuery}
-          onSearch={handleNaturalLanguageSearch} 
-          className="w-full"
-        />
-      </div>
-      
-      {/* Container for filter chips and view options */}
-      <div className="container mx-auto max-w-[1440px] flex items-center justify-between">
-        <div className="flex flex-wrap gap-2">
-          <FilterChips
-            initialChips={regions}
-            onChange={handleRegionChange}
+    // Outermost container for the entire search bar section, with background and border
+    <div className="sticky top-0 z-10 border-b bg-gray-50">
+      {/* Centered container for the content within the search bar section */}
+      <div className="py-4 container mx-auto max-w-[1440px]">
+        {/* Container for the natural language search input */}
+        <div className="mb-4">
+          <NaturalLanguageSearch 
+            initialQuery={searchQuery}
+            onSearch={handleNaturalLanguageSearch} 
+            className="w-full"
           />
         </div>
         
-        <div className="flex items-center">
-          <span className="mr-2 text-sm text-gray-500 dark:text-gray-400">View</span>
-          <Button variant="outline" size="icon" className="p-2">
-            <List className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-          </Button>
-          <Button variant="outline" size="icon" className="ml-2 p-2">
-            <LayoutGrid className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-          </Button>
+        {/* Container for filter chips and view toggle options */}
+        <div className="flex items-center justify-between">
+          {/* Container for the filter chips themselves */}
+          <div className="flex flex-wrap gap-2">
+            <FilterChips
+              initialChips={regions}
+              onChange={handleRegionChange}
+            />
+          </div>
+          
+          {/* Container for the view options (List/Grid) */}
+          <div className="flex items-center">
+            <span className="mr-2 text-sm text-gray-500 dark:text-gray-400">View</span>
+            <Button variant="outline" size="icon" className="p-2">
+              <List className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+            </Button>
+            <Button variant="outline" size="icon" className="ml-2 p-2">
+              <LayoutGrid className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+            </Button>
+          </div>
         </div>
       </div>
       
