@@ -59,7 +59,7 @@ const SearchBar = () => {
       {/* Centered container for the content within the search bar section */}
       <div className="py-4 container mx-auto max-w-[1440px]">
         {/* Container for the natural language search input */}
-        <div className="mb-4">
+        <div className="mb-4 px-4">
           <NaturalLanguageSearch 
             initialQuery={searchQuery}
             onSearch={handleNaturalLanguageSearch} 
@@ -68,7 +68,7 @@ const SearchBar = () => {
         </div>
         
         {/* Container for filter chips and view toggle options */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-4">
           {/* Container for the filter chips themselves */}
           <div className="flex flex-wrap gap-2">
             <FilterChips

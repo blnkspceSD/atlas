@@ -4,17 +4,18 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 
+// Type definition for individual filter chip data structure
 export type FilterChip = {
   id: string;
   text: string;
   isActive?: boolean;
-  hasSettings?: boolean;
-  onSettingsClick?: () => void;
+  hasSettings?: boolean;  // Determines if chip shows settings button when active
+  onSettingsClick?: () => void;  // Callback for when settings button is clicked
 };
 
 interface FilterChipsProps {
   initialChips: FilterChip[];
-  onChange?: (chips: FilterChip[]) => void;
+  onChange?: (chips: FilterChip[]) => void;  // Callback when chip states change
   className?: string;
 }
 
@@ -23,10 +24,11 @@ export function FilterChips({
   onChange,
   className,
 }: FilterChipsProps) {
-  // Toggle a chip's active state
+  // Core function to toggle a chip's active/inactive state
   const toggleChip = (chipId: string) => {
     console.log("Toggling chip:", chipId);
     
+    // Create new array with updated chip state, keeping others unchanged
     const updatedChips = initialChips.map(chip => {
       if (chip.id === chipId) {
         const newChip = { ...chip, isActive: !chip.isActive };
@@ -37,12 +39,13 @@ export function FilterChips({
     });
     
     console.log("Updated chips:", updatedChips);
+    // Notify parent component of state changes
     onChange?.(updatedChips);
   };
 
-  // Handle settings button click
+  // Handle settings button click without toggling the chip itself
   const handleSettingsClick = (e: React.MouseEvent, chip: FilterChip) => {
-    e.stopPropagation(); // Prevent toggling the chip
+    e.stopPropagation(); // Prevent the chip toggle from firing
     if (chip.onSettingsClick) {
       chip.onSettingsClick();
     }
@@ -56,13 +59,15 @@ export function FilterChips({
           onClick={() => toggleChip(chip.id)}
           className={cn(
             "relative h-7 px-3 rounded-full font-medium text-xs flex items-center cursor-pointer transition-colors border",
+            // Conditional styling based on active state
             chip.isActive 
-              ? "bg-[#D5EDF9] border-[#0D8DCF] text-[#0D8DCF]" 
-              : "bg-white border-[#DEE0E8] text-gray-700 hover:bg-gray-50"
+              ? "bg-[#D5EDF9] border-[#0D8DCF] text-[#0D8DCF]"  // Active: blue theme
+              : "bg-white border-[#DEE0E8] text-gray-700 hover:bg-gray-50"  // Inactive: gray theme
           )}
           type="button"
         >
           {chip.text}
+          {/* Settings button - only shown when chip is active and has settings enabled */}
           {chip.hasSettings && chip.isActive && (
             <span 
               onClick={(e) => handleSettingsClick(e, chip)}
