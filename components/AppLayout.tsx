@@ -70,7 +70,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       />
       
       {/* Main content area below the header */}
-      <div className="flex h-[calc(100vh-57px)] pt-[57px]">
+      <div className="flex h-full">
         {/* Sidebar component with all state and handlers */}
         <Sidebar 
           isOpen={isSidebarOpen}  // Controls sidebar visibility

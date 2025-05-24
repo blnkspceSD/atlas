@@ -55,11 +55,11 @@ const SearchBar = () => {
 
   return (
     // Outermost container for the entire search bar section, with background and border
-    <div className="sticky top-0 z-10 border-b bg-gray-50">
+    <div className="w-full sticky top-0 z-10 border-b bg-gray-50">
       {/* Centered container for the content within the search bar section */}
-      <div className="py-4 container mx-auto max-w-[1440px]">
+      <div className="py-4 container mx-auto">
         {/* Container for the natural language search input */}
-        <div className="mb-4 px-4">
+        <div className="mb-4">
           <NaturalLanguageSearch 
             initialQuery={searchQuery}
             onSearch={handleNaturalLanguageSearch} 

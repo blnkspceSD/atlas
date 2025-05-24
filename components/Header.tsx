@@ -12,7 +12,7 @@ interface HeaderProps {
 
 const Header = ({ onMenuClick, isCollapsed, onToggleCollapse }: HeaderProps) => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-50 border-b border-gray-200 h-[57px]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-50 border-b border-gray-200">
       <div className="flex items-center justify-between h-full px-4">
         <div className="flex items-center">
           {/* Mobile menu toggle */}
