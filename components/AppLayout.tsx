@@ -69,8 +69,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         onToggleCollapse={toggleCollapse}  // Collapse toggle handler
       />
       
-      {/* Main content area below the header */}
-      <div className="flex h-full">
+      {/* Main content area below the header with top padding to account for fixed header */}
+      <div className="flex h-full pt-16">
         {/* Sidebar component with all state and handlers */}
         <Sidebar 
           isOpen={isSidebarOpen}  // Controls sidebar visibility
@@ -85,7 +85,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           className="flex-1 overflow-y-auto bg-gray-50"
         >
           {/* Inner container with minimum full height */}
-          <div className="min-h-full bg-gray-50">
+          <div className="min-h-full w-full bg-gray-50">
             {/* Render child components/pages passed to the layout */}
             {children}
           </div>

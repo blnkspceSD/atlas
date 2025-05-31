@@ -96,7 +96,7 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse, currentPath }
               duration: 0.2
             }}
           >
-            <div className={`flex flex-col h-full ${isCollapsed ? 'items-center' : ''}`}>
+            <div className={`flex flex-col h-full  ${isCollapsed ? 'items-center' : ''}`}>
               {/* Navigation Links */}
               <nav className="flex-grow p-4 space-y-6 overflow-y-auto">
                 {navItems.map((group) => (
