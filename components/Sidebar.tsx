@@ -89,35 +89,35 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
   
   // Determine if sidebar should be expanded (either manually expanded or hovered)
   const isExpanded = !isCollapsed || isHovered;
-
+  
   return (
     <>
       {/* Mobile Backdrop */}
-      {isOpen && (
-        <motion.div 
+        {isOpen && (
+          <motion.div 
           className="fixed inset-0 bg-black/50 md:hidden z-40"
-          onClick={onClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-        />
-      )}
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          />
+        )}
 
       {/* Mobile Sidebar */}
-      {isOpen && (
-        <motion.aside 
+        {isOpen && (
+          <motion.aside 
           className="flex flex-col flex-shrink-0 overflow-y-auto w-64 bg-background border-r border-border z-40 h-full fixed top-0 inset-y-auto left-0 md:hidden shadow-lg"
-          initial={{ x: -320 }}
-          animate={{ x: 0 }}
-          exit={{ x: -320 }}
-          transition={{ 
-            type: "tween", 
-            duration: 0.3,
-            ease: "easeInOut"
-          }}
-        >
-          <div className="flex flex-col h-full">
+            initial={{ x: -320 }}
+            animate={{ x: 0 }}
+            exit={{ x: -320 }}
+            transition={{ 
+              type: "tween", 
+              duration: 0.3,
+              ease: "easeInOut"
+            }}
+          >
+            <div className="flex flex-col h-full">
             {/* Mobile Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
               <div className="text-primary text-xl font-bold">atlas.</div>
@@ -130,8 +130,8 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
               </button>
             </div>
 
-            {/* Navigation Links */}
-            <ScrollArea className="flex-grow p-4">
+              {/* Navigation Links */}
+            <ScrollArea className="flex-grow py-2">
               <div className="space-y-6">
                 {/* EXPLORE */}
                 <div>
@@ -143,23 +143,23 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                       href="/"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname === "/" && "bg-muted text-blue-600",
                       )}
                     >
                       <LayoutGrid className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Jobs</p>
+                      <p className="ml-3 text-sm font-medium">Jobs</p>
                     </Link>
                     <Link
                       href="/saved"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("saved") && "bg-muted text-blue-600",
                       )}
                     >
                       <Bookmark className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Saved</p>
+                      <p className="ml-3 text-sm font-medium">Saved</p>
                     </Link>
                   </div>
                 </div>
@@ -174,23 +174,23 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                       href="/applications"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("applications") && "bg-muted text-blue-600",
                       )}
                     >
                       <FileText className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Applications</p>
+                      <p className="ml-3 text-sm font-medium">Applications</p>
                     </Link>
                     <Link
                       href="/profile"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("profile") && "bg-muted text-blue-600",
                       )}
                     >
                       <UserCircle className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Resume</p>
+                      <p className="ml-3 text-sm font-medium">Resume</p>
                     </Link>
                   </div>
                 </div>
@@ -205,12 +205,12 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                       href="/feed"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("feed") && "bg-muted text-blue-600",
                       )}
                     >
                       <MessageSquare className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Feed</p>
+                      <p className="ml-3 text-sm font-medium">Feed</p>
                     </Link>
                   </div>
                 </div>
@@ -219,29 +219,29 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                 <div>
                   <h2 className="px-3 mb-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                     ACCOUNT
-                  </h2>
+                    </h2>
                   <div className="space-y-1">
                     <Link
                       href="/settings"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("settings") && "bg-muted text-blue-600",
                       )}
                     >
                       <Settings className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Settings</p>
+                      <p className="ml-3 text-sm font-medium">Settings</p>
                     </Link>
                     <Link
                       href="/logout"
                       onClick={onClose}
                       className={cn(
-                        "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                        "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                         pathname?.includes("logout") && "bg-muted text-blue-600",
                       )}
                     >
                       <LogOut className="h-4 w-4" />
-                      <p className="ml-2 text-sm font-medium">Logout</p>
+                      <p className="ml-3 text-sm font-medium">Logout</p>
                     </Link>
                   </div>
                 </div>
@@ -260,8 +260,8 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                 </div>
               </div>
             </div>
-          </div>
-        </motion.aside>
+            </div>
+          </motion.aside>
       )}
 
       {/* Desktop Sidebar */}
@@ -277,11 +277,11 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
         onMouseLeave={() => setIsHovered(false)}
       >
         <motion.div
-          className={`relative z-40 flex text-muted-foreground h-full shrink-0 flex-col transition-all`}
+          className={`relative z-40 flex text-muted-foreground h-full w-full flex-col transition-all`}
           variants={contentVariants}
         >
-          <motion.ul variants={staggerVariants} className="flex h-full flex-col">
-            <div className="flex grow flex-col items-center">
+          <motion.ul variants={staggerVariants} className="flex h-full w-full flex-col">
+            <div className="flex grow flex-col w-full">
               <div className="flex h-[54px] w-full shrink-0 border-b border-border p-2">
                 <div className="mt-[1.5px] flex w-full">
                   <DropdownMenu modal={false}>
@@ -338,36 +338,36 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                 </div>
               </div>
 
-              <div className="flex h-full w-full flex-col">
+              <div className="flex h-full w-full flex-col p-2">
                 <div className="flex grow flex-col gap-4">
-                  <ScrollArea className="h-16 grow p-2">
+                  <ScrollArea className="h-16 grow py-2">
                     <div className={cn("flex w-full flex-col gap-1")}>
                       {/* EXPLORE */}
                       <Link
                         href="/"
                         className={cn(
-                          "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                          "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                           pathname === "/" && "bg-muted text-blue-600",
                         )}
                       >
                         <LayoutGrid className="h-4 w-4" />
                         <motion.li variants={variants}>
                           {isExpanded && (
-                            <p className="ml-2 text-sm font-medium">Jobs</p>
+                            <p className="ml-3 text-sm font-medium">Jobs</p>
                           )}
                         </motion.li>
                       </Link>
                       <Link
                         href="/saved"
                         className={cn(
-                          "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                          "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                           pathname?.includes("saved") && "bg-muted text-blue-600",
                         )}
                       >
                         <Bookmark className="h-4 w-4" />
                         <motion.li variants={variants}>
                           {isExpanded && (
-                            <p className="ml-2 text-sm font-medium">Saved</p>
+                            <p className="ml-3 text-sm font-medium">Saved</p>
                           )}
                         </motion.li>
                       </Link>
@@ -378,28 +378,28 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                       <Link
                         href="/applications"
                         className={cn(
-                          "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                          "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                           pathname?.includes("applications") && "bg-muted text-blue-600",
                         )}
                       >
                         <FileText className="h-4 w-4" />
                         <motion.li variants={variants}>
                           {isExpanded && (
-                            <p className="ml-2 text-sm font-medium">Applications</p>
+                            <p className="ml-3 text-sm font-medium">Applications</p>
                           )}
                         </motion.li>
                       </Link>
                       <Link
                         href="/profile"
                         className={cn(
-                          "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                          "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                           pathname?.includes("profile") && "bg-muted text-blue-600",
                         )}
                       >
                         <UserCircle className="h-4 w-4" />
                         <motion.li variants={variants}>
                           {isExpanded && (
-                            <p className="ml-2 text-sm font-medium">Resume</p>
+                            <p className="ml-3 text-sm font-medium">Resume</p>
                           )}
                         </motion.li>
                       </Link>
@@ -410,14 +410,14 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                       <Link
                         href="/feed"
                         className={cn(
-                          "flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary",
+                          "flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary",
                           pathname?.includes("feed") && "bg-muted text-blue-600",
                         )}
                       >
                         <MessageSquare className="h-4 w-4" />
                         <motion.li variants={variants}>
                           {isExpanded && (
-                            <div className="ml-2 flex items-center gap-2">
+                            <div className="ml-3 flex items-center gap-2">
                               <p className="text-sm font-medium">Feed</p>
                               <Badge
                                 className={cn(
@@ -435,22 +435,22 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                   </ScrollArea>
                 </div>
                 
-                <div className="flex flex-col p-2">
+                <div className="flex flex-col py-2">
                   <Link
                     href="/settings"
-                    className="mt-auto flex h-8 w-full flex-row items-center rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary"
+                    className="mt-auto flex h-10 w-full flex-row items-center rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary"
                   >
                     <Settings className="h-4 w-4 shrink-0" />
                     <motion.li variants={variants}>
                       {isExpanded && (
-                        <p className="ml-2 text-sm font-medium">Settings</p>
+                        <p className="ml-3 text-sm font-medium">Settings</p>
                       )}
                     </motion.li>
                   </Link>
                   <div>
                     <DropdownMenu modal={false}>
                       <DropdownMenuTrigger className="w-full">
-                        <div className="flex h-8 w-full flex-row items-center gap-2 rounded-md px-2 py-1.5 transition hover:bg-muted hover:text-primary">
+                        <div className="flex h-10 w-full flex-row items-center gap-2 rounded-md px-3 py-2 transition hover:bg-muted hover:text-primary">
                           <Avatar className="size-4">
                             <AvatarFallback>AU</AvatarFallback>
                           </Avatar>
@@ -496,7 +496,7 @@ export function Sidebar({ isOpen, onClose, isCollapsed, onToggleCollapse, curren
                   </div>
                 </div>
               </div>
-            </div>
+        </div>
           </motion.ul>
         </motion.div>
       </motion.div>
