@@ -60,8 +60,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   }
 
   return (
-    // Main container with full screen height and light gray background
-    <div className="h-screen bg-gray-50">
+    // Main container with full screen height
+    <div className="h-screen bg-background">
       {/* Header component with menu controls */}
       <Header 
         onMenuClick={toggleSidebar}  // Hamburger menu click handler
@@ -69,28 +69,29 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         onToggleCollapse={toggleCollapse}  // Collapse toggle handler
       />
       
-      {/* Main content area below the header with top padding to account for fixed header */}
-      <div className="flex h-full pt-16">
-        {/* Sidebar component with all state and handlers */}
-        <Sidebar 
-          isOpen={isSidebarOpen}  // Controls sidebar visibility
-          onClose={() => setIsSidebarOpen(false)}  // Handler to close sidebar
-          isCollapsed={isSidebarCollapsed}  // Controls sidebar collapse state
-          onToggleCollapse={toggleCollapse}  // Handler to toggle collapse
-          currentPath={pathname}  // Current route for active navigation highlighting
-        />
-        
-        {/* Main content area that takes remaining space */}
-        <main 
-          className="flex-1 overflow-y-auto bg-gray-50"
-        >
-          {/* Inner container with minimum full height */}
-          <div className="min-h-full w-full bg-gray-50">
-            {/* Render child components/pages passed to the layout */}
-            {children}
-          </div>
-        </main>
-      </div>
+      {/* Sidebar component with all state and handlers */}
+      <Sidebar 
+        isOpen={isSidebarOpen}  // Controls sidebar visibility
+        onClose={() => setIsSidebarOpen(false)}  // Handler to close sidebar
+        isCollapsed={isSidebarCollapsed}  // Controls sidebar collapse state
+        onToggleCollapse={toggleCollapse}  // Handler to toggle collapse
+        currentPath={pathname}  // Current route for active navigation highlighting
+      />
+      
+      {/* Main content area that adapts to sidebar state */}
+      <main 
+        className={`flex-1 overflow-y-auto transition-all duration-200 pt-16 bg-background ${
+          isSidebarCollapsed 
+            ? 'md:pl-[3.05rem]' // Collapsed sidebar width
+            : 'md:pl-[15rem]'   // Expanded sidebar width
+        }`}
+      >
+        {/* Inner container with minimum full height */}
+        <div className="min-h-full w-full">
+          {/* Render child components/pages passed to the layout */}
+          {children}
+        </div>
+      </main>
     </div>
   )
 }
