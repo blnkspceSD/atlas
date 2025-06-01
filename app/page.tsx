@@ -55,7 +55,7 @@ const JobListArea: React.FC<JobListAreaProps> = ({ isInitialLoading, fetchError 
     // Outer container for the job listing area, including results count and job cards
     <div className="px-4">
       {/* Text displaying the number of jobs found */}
-      <div className="my-4 text-sm text-gray-600">
+      <div className="text-sm text-gray-600">
         Showing {filteredJobs.length} remote jobs
       </div>
       <JobList jobs={filteredJobs} />
@@ -105,7 +105,7 @@ export default function Home() {
   return (
     <AppLayout>
       <JobFilterProvider initialJobs={allJobs}>
-        <SearchBar className="px-0" />
+        <SearchBar />
         <JobListArea 
           isInitialLoading={isInitialLoading} 
           fetchError={fetchError} 
