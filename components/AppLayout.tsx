@@ -60,8 +60,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   }
 
   return (
-    // Main container with full screen height
-    <div className="h-screen bg-background">
+    // Main container with full screen height and background
+    <div className="h-screen bg-gray-50">
       {/* Header component with menu controls */}
       <Header 
         onMenuClick={toggleSidebar}  // Hamburger menu click handler
@@ -80,14 +80,14 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       
       {/* Main content area that adapts to sidebar state */}
       <main 
-        className={`flex-1 overflow-y-auto transition-all duration-200 pt-16 bg-background ${
+        className={`flex-1 overflow-y-auto transition-all duration-200 pt-16 bg-gray-50 ${
           isSidebarCollapsed 
             ? 'md:pl-[3.05rem]' // Collapsed sidebar width
             : 'md:pl-[15rem]'   // Expanded sidebar width
         }`}
       >
-        {/* Inner container with minimum full height */}
-        <div className="min-h-full w-full">
+        {/* Inner container with minimum full screen height and background */}
+        <div className="min-h-screen w-full bg-gray-50">
           {/* Render child components/pages passed to the layout */}
           {children}
         </div>
